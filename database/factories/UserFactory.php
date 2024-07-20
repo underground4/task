@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enum\User\UserRoleEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -36,5 +38,32 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function withRoleAdmin()
+    {
+        return $this->state(fn(array $attributes) => [
+        ])
+            ->afterCreating(function (User $user) {
+                $user->assignRole(UserRoleEnum::ADMIN);
+            });
+    }
+
+    public function withRoleEditor()
+    {
+        return $this->state(fn(array $attributes) => [
+        ])
+            ->afterCreating(function (User $user) {
+                $user->assignRole(UserRoleEnum::EDITOR);
+            });
+    }
+
+    public function withRoleUser()
+    {
+        return $this->state(fn(array $attributes) => [
+        ])
+            ->afterCreating(function (User $user) {
+                $user->assignRole(UserRoleEnum::USER);
+            });
     }
 }

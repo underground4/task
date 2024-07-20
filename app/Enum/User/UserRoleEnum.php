@@ -2,18 +2,20 @@
 
 namespace App\Enum\User;
 
-enum UserRoleEnum: int
+enum UserRoleEnum: string
 {
-    case ADMIN = 1;
-    case EDITOR = 2;
-    case USER = 3;
 
-    public static function descriptions(): array
+    case ADMIN = 'admin';
+    case EDITOR = 'editor';
+    case USER = 'user';
+
+    // extra helper to allow for greater customization of displayed values, without disclosing the name/value data directly
+    public function label(): string
     {
-        return [
-            self::ADMIN->value => 'Администратор',
-            self::EDITOR->value => 'Редактор',
-            self::USER->value => 'Пользователь',
-        ];
+        return match ($this) {
+            static::ADMIN => 'admin',
+            static::EDITOR => 'editor',
+            static::USER => 'user',
+        };
     }
 }

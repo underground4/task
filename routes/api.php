@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(
+    [
+        'middleware' => [
+            'json.response',
+        ],
+    ],
+    function () {
+        \App\Http\Controllers\API\V1\User\UserController::routers();
+    }
+);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

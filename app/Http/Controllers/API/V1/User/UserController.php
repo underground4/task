@@ -28,7 +28,7 @@ class UserController extends CoreController
                 Route::get('getRoles', [self::class, 'getRoles'])
                     ->middleware(['can:'.PermissionEnum::ANY_USER_MANAGE]);
 
-                Route::get('getUsersByRoles/{roleId}', [self::class, 'getUsersByRoles'])
+                Route::get('getUsersByRoleId/{roleId}', [self::class, 'getUsersByRoleId'])
                     ->middleware(['can:'.PermissionEnum::ANY_USER_MANAGE]);
             }
         );
@@ -55,9 +55,9 @@ class UserController extends CoreController
         return $this->responseSuccess($roles);
     }
 
-    public function getUsersByRoles($roleId)
+    public function getUsersByRoleId($roleId)
     {
-        $usersWithRole = (new UserService())->getUsersByRoles($roleId);
+        $usersWithRole = (new UserService())->getUsersByRoleId($roleId);
 
         return $this->responseSuccess(UserResource::collection($usersWithRole));
     }

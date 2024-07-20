@@ -29,7 +29,7 @@ class UserService
         return Role::all()->pluck('name');
     }
 
-    public function getUsersByRoles($roleId)
+    public function getUsersByRoleId($roleId)
     {
         $role = Role::query()->where('id', $roleId)->first();
 

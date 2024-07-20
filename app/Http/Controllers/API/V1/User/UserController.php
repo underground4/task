@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\User;
 
+use App\Enum\User\PermissionEnum;
 use App\Http\Controllers\CoreController;
 use App\Http\Resources\User\UserResource;
 use App\Service\User\UserService;
@@ -18,10 +19,17 @@ class UserController extends CoreController
                 'prefix' => static::$routePrefix,
             ],
             function () {
-                Route::get('getUsers', [self::class, 'getAllUsers']);
-                Route::get('getUserById/{id}', [self::class, 'getUserById']);
-                Route::get('getRoles', [self::class, 'getRoles']);
-                Route::get('getUsersByRoles/{roleId}', [self::class, 'getUsersByRoles']);
+                Route::get('getUsers', [self::class, 'getAllUsers'])
+                    ->middleware(['can:'.PermissionEnum::ANY_USER_MANAGE]);
+
+                Route::get('getUserById/{id}', [self::class, 'getUserById'])
+                    ->middleware(['can:'.PermissionEnum::ANY_USER_MANAGE]);
+
+                Route::get('getRoles', [self::class, 'getRoles'])
+                    ->middleware(['can:'.PermissionEnum::ANY_USER_MANAGE]);
+
+                Route::get('getUsersByRoles/{roleId}', [self::class, 'getUsersByRoles'])
+                    ->middleware(['can:'.PermissionEnum::ANY_USER_MANAGE]);
             }
         );
     }

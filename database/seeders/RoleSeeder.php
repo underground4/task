@@ -17,9 +17,20 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::create(['name' => UserRoleEnum::ADMIN->value]);
-        Role::create(['name' => UserRoleEnum::EDITOR->value]);
-        Role::create(['name' => UserRoleEnum::USER->value]);
+        $adminRole = Role::create([
+            'name' => UserRoleEnum::ADMIN->value,
+            'guard_name' => 'api'
+        ]);
+
+        Role::create([
+            'name' => UserRoleEnum::EDITOR->value,
+            'guard_name' => 'api'
+        ]);
+
+        Role::create([
+            'name' => UserRoleEnum::USER->value,
+            'guard_name' => 'api'
+        ]);
 
         Permission::create(['name' => PermissionEnum::ANY_USER_MANAGE]);
 

@@ -15,6 +15,11 @@ abstract class CoreController extends Controller
         'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept, Redirect',
     ];
 
+    public function getGuardName()
+    {
+        return 'api';
+    }
+
     /**
      * @param \Exception $e
      * @return \Illuminate\Http\JsonResponse

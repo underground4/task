@@ -21,6 +21,7 @@ Route::group(
     ],
     function () {
         \App\Http\Controllers\API\V1\User\UserController::routers();
+        \App\Http\Controllers\API\V1\Auth\AuthController::routers();
     }
 );
 

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Controllers\CoreController;
+use App\Http\Requests\Auth\UserAuthRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 class AuthController extends CoreController
 {
@@ -24,14 +24,12 @@ class AuthController extends CoreController
     }
 
     /**
-     * @param Request $request
+     * @param UserAuthRequest $request
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(UserAuthRequest $request)
     {
-        $credentials = request(['email', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

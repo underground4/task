@@ -25,5 +25,11 @@ class DatabaseSeeder extends Seeder
            'email' => 'test@test.ru',
            'password' => bcrypt('12345678')
         ]);
+
+        // Это если захочется потестировать, что под другой ролью нельзя получить доступ к api
+        User::factory()->withRoleUser()->create([
+            'email' => 'test@test1.ru',
+            'password' => bcrypt('12345678')
+        ]);
     }
 }
